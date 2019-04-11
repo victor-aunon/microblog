@@ -1,0 +1,7 @@
+__pycache__
+
+tomato-env
+
+.env
+app.db
+microblog.log*
