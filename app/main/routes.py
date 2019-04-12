@@ -2,7 +2,7 @@ from datetime import datetime
 from flask import render_template, flash, redirect, url_for, request, g, jsonify, current_app
 from flask_login import current_user, login_required
 from flask_babel import _, lazy_gettext as _l, get_locale
-from guess_language import guess_language
+from textblob import TextBlob
 from app import db
 from app.main import bp
 from app.main.forms import EditProfileForm, PostForm, SearchForm
@@ -19,8 +19,9 @@ from app.translate import translate
 def index():
     form = PostForm()
     if form.validate_on_submit():
-        language = guess_language(form.post.data)
-        if language == 'UNKNOWN' or len(language) > 5:
+        try:
+            language = TextBlob(form.post.data).detect_language()
+        except:
             language = ''
         post = Post(body=form.post.data, author=current_user, language=language)
         db.session.add(post)
