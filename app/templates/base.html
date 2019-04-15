@@ -8,19 +8,61 @@
 
     <script>
         function translate(sourceElem, destElem, sourceLang, destLang) {
-            $ (destElem).html('<img src="{{ url_for('static', filename='loading.gif') }}">');
+            $(destElem).html('<img src="{{ url_for('static', filename='loading.gif') }}">');
             // Calling the server translate function. 1st argument: URL to send the request,
             // 2nd argument: dictionary with the three data that the server expects
-            $ .post('/translate', {
+            $.post('/translate', {
                 text: $(sourceElem).text(),
                 source_language: sourceLang,
                 dest_language: destLang
                 }).done(function(response) {
-                    $ (destElem).text(response['text'])
+                    $(destElem).text(response['text'])
                 }).fail(function() {
-                    $ (destElem).text("{{ _('Error: Could not contact server.') }}");
+                    $(destElem).text("{{ _('Error: Could not contact server.') }}");
                 });
             }
+
+        $(function() {
+            var timer = null;
+            $('.user_popup').hover(
+                function(event) {
+                    // mouse in event handler
+                    var elem = $(event.currentTarget);
+                    // timer = setTimeout(function() {
+                    //     timer = null;
+                        xhr = $.ajax('/user/' + elem.first().text().trim() + '/popup').done(
+                            function(data) {
+                                xhr = null;
+                                elem.popover({
+                                    trigger: 'auto',
+                                    html: true,
+                                    animation: true,
+                                    container: elem,
+                                    content: data
+                                }).popover('show');
+                                // moment to render the last seen time
+                                flask_moment_render_all();
+                            }
+                        );
+                    // }, 1000);
+                },
+                function(event) {
+                    // mouse out event handler
+                    var elem = $(event.currentTarget);
+                    // if (timer) {
+                    //     clearTimeout(timer);
+                    //     timer = null;
+                    // }
+                    // else if (xhr) {
+                    //     xhr.abort();
+                    //     xhr = null;
+                    // }
+                    // else{
+                        elem.popover('destroy');
+                    // }
+                }
+            )
+        });
     </script>
 {% endblock %}
 
