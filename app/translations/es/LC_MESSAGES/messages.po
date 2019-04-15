@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-04-10 18:59+0200\n"
+"POT-Creation-Date: 2019-04-15 15:48+0200\n"
 "PO-Revision-Date: 2019-04-08 12:37+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: es\n"
@@ -34,48 +34,48 @@ msgstr "Error: el servicio de traducción ha fallado."
 msgid "[Microblog] Reset Your Password"
 msgstr "[Microblog] Restablezca su contraseña"
 
-#: app/auth/forms.py:8 app/auth/forms.py:15 app/main/forms.py:10
+#: app/auth/forms.py:9 app/auth/forms.py:16 app/main/forms.py:10
 msgid "Username"
 msgstr "Nombre de usuario"
 
-#: app/auth/forms.py:9 app/auth/forms.py:17 app/auth/forms.py:38
+#: app/auth/forms.py:10 app/auth/forms.py:18 app/auth/forms.py:39
 msgid "Password"
 msgstr "Contraseña"
 
-#: app/auth/forms.py:10
+#: app/auth/forms.py:11
 msgid "Remember Me"
 msgstr "Recuérdame"
 
-#: app/auth/forms.py:11 app/auth/routes.py:27 app/templates/auth/login.html:5
+#: app/auth/forms.py:12 app/auth/routes.py:27 app/templates/auth/login.html:5
 msgid "Sign In"
 msgstr "Acceder"
 
-#: app/auth/forms.py:16 app/auth/forms.py:33
+#: app/auth/forms.py:17 app/auth/forms.py:34
 msgid "Email"
 msgstr "Email"
 
-#: app/auth/forms.py:18 app/auth/forms.py:39
+#: app/auth/forms.py:19 app/auth/forms.py:40
 msgid "Repeat Password"
 msgstr "Repite la contraseña"
 
-#: app/auth/forms.py:19 app/auth/routes.py:48
+#: app/auth/forms.py:20 app/auth/routes.py:48
 #: app/templates/auth/register.html:5
 msgid "Register"
 msgstr "Registro"
 
-#: app/auth/forms.py:24 app/main/forms.py:22
+#: app/auth/forms.py:25 app/main/forms.py:22
 msgid "Please use a different username."
 msgstr "Por favor elige otro nombre de usuario."
 
-#: app/auth/forms.py:29
+#: app/auth/forms.py:30
 msgid "Please use a different email address."
 msgstr "Por favor usa otra dirección de correo."
 
-#: app/auth/forms.py:34
+#: app/auth/forms.py:35
 msgid "Request password reset"
 msgstr "Solicitar una nueva contraseña"
 
-#: app/auth/forms.py:40
+#: app/auth/forms.py:41
 msgid "Request Password Reset"
 msgstr "Solicitar una nueva contraseña"
 
@@ -105,7 +105,7 @@ msgstr "Has cambiado tu contraseña."
 msgid "About me"
 msgstr "Acerca de mí"
 
-#: app/main/forms.py:12 app/main/forms.py:27
+#: app/main/forms.py:12 app/main/forms.py:27 app/main/forms.py:47
 msgid "Submit"
 msgstr "Enviar"
 
@@ -113,54 +113,66 @@ msgstr "Enviar"
 msgid "Say something"
 msgstr "Escribe algo"
 
-#: app/main/forms.py:31 app/main/routes.py:145
+#: app/main/forms.py:31 app/main/routes.py:146
 msgid "Search"
 msgstr "Buscar"
 
-#: app/main/routes.py:28
+#: app/main/forms.py:46
+msgid "Message"
+msgstr "Mensaje"
+
+#: app/main/routes.py:29
 msgid "Your post is now live!"
 msgstr "¡Tu entrada se ha publicado!"
 
-#: app/main/routes.py:38
+#: app/main/routes.py:39
 msgid "Home Page"
 msgstr "Inicio"
 
-#: app/main/routes.py:50 app/templates/base.html:46
+#: app/main/routes.py:51 app/templates/base.html:88
 msgid "Explore"
 msgstr "Explorar"
 
-#: app/main/routes.py:84
+#: app/main/routes.py:85
 msgid "Your changes have been saved."
 msgstr "Tus cambios han sido guardados."
 
-#: app/main/routes.py:89 app/templates/edit_profile.html:5
+#: app/main/routes.py:90 app/templates/edit_profile.html:5
 msgid "Edit Profile"
 msgstr "Editar perfil"
 
-#: app/main/routes.py:100
+#: app/main/routes.py:101
 msgid "You cannot follow yourself!"
 msgstr "¡No puedes seguirte a ti mismo!"
 
-#: app/main/routes.py:104
+#: app/main/routes.py:105
 #, python-format
 msgid "You are following %(username)s!"
 msgstr "¡Ahora sigues a %(username)s!"
 
-#: app/main/routes.py:116
+#: app/main/routes.py:117
 msgid "You cannot unfollow yourself!"
 msgstr "¡No puedes dejar de seguirte a ti mismo!"
 
-#: app/main/routes.py:120
+#: app/main/routes.py:121
 #, python-format
 msgid "You are not following %(username)s."
 msgstr "Ya no sigues a %(username)s."
 
-#: app/templates/_post.html:14
+#: app/main/routes.py:166
+msgid "Your message has been sent."
+msgstr "Tu mensaje ha sido enviado."
+
+#: app/main/routes.py:168
+msgid "Send Message"
+msgstr "Enviar mensaje"
+
+#: app/templates/_post.html:16
 #, python-format
 msgid "%(username)s said %(when)s"
 msgstr "%(username)s dijo %(when)s"
 
-#: app/templates/_post.html:25
+#: app/templates/_post.html:27
 msgid "Translate"
 msgstr "Traducir"
 
@@ -168,23 +180,27 @@ msgstr "Traducir"
 msgid "Error: Could not contact server."
 msgstr "Error: No se pudo conectar con el servidor."
 
-#: app/templates/base.html:28
+#: app/templates/base.html:70
 msgid "Welcome to Microblog"
 msgstr "Bienvenid@ a Microblog"
 
-#: app/templates/base.html:45
+#: app/templates/base.html:87
 msgid "Home"
 msgstr "Inicio"
 
-#: app/templates/base.html:58
+#: app/templates/base.html:100
 msgid "Login"
 msgstr "Acceso"
 
-#: app/templates/base.html:60
+#: app/templates/base.html:102 app/templates/messages.html:4
+msgid "Messages"
+msgstr "Mensajes"
+
+#: app/templates/base.html:103
 msgid "Profile"
 msgstr "Perfil"
 
-#: app/templates/base.html:61
+#: app/templates/base.html:104
 msgid "Logout"
 msgstr "Salir"
 
@@ -193,13 +209,21 @@ msgstr "Salir"
 msgid "Hi, %(username)s"
 msgstr "Hola, %(username)s"
 
-#: app/templates/index.html:29 app/templates/user.html:31
+#: app/templates/index.html:29 app/templates/user.html:36
 msgid "Newer posts"
 msgstr "Mensajes nuevos"
 
-#: app/templates/index.html:34 app/templates/user.html:36
+#: app/templates/index.html:34 app/templates/user.html:41
 msgid "Older posts"
-msgstr "Mensajes viejos"
+msgstr "Mensajes antiguos"
+
+#: app/templates/messages.html:12
+msgid "Newer messages"
+msgstr "Mensajes nuevos"
+
+#: app/templates/messages.html:17
+msgid "Older messages"
+msgstr "Mensajes antiguos"
 
 #: app/templates/search.html:4
 msgid "Search Results"
@@ -235,13 +259,31 @@ msgstr "Seguidos"
 msgid "Edit your profile"
 msgstr "Edita tu perfil"
 
-#: app/templates/user.html:16
+#: app/templates/user.html:16 app/templates/user_popup.html:24
 msgid "Follow"
 msgstr "Seguir"
 
-#: app/templates/user.html:18
+#: app/templates/user.html:18 app/templates/user_popup.html:28
 msgid "Unfollow"
 msgstr "Dejar de seguir"
+
+#: app/templates/user.html:22
+msgid "Send private message"
+msgstr "Enviar mensaje privado"
+
+#: app/templates/user_popup.html:15
+msgid "Last seen on"
+msgstr "Visto por última vez"
+
+#: app/templates/user_popup.html:19
+#, python-format
+msgid "%(count)d followers"
+msgstr "%(count)d seguidores"
+
+#: app/templates/user_popup.html:20
+#, python-format
+msgid "%(count)d following"
+msgstr "%(count)d siguiendo"
 
 #: app/templates/auth/login.html:13
 msgid "Forgot Your Password?"

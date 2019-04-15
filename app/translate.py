@@ -8,7 +8,7 @@ def translate(text, source_language, dest_language):
     if 'MS_TRANSLATOR_KEY' not in current_app.config or not current_app.config['MS_TRANSLATOR_KEY']:
         return _('Error: the translation service is not configured.')
     auth = {'Ocp-Apim-Subscription-Key': current_app.config['MS_TRANSLATOR_KEY']}
-    body = [{ 'text': text }]
+    body = [{'text': text}]
     r = requests.post('https://api-eur.cognitive.microsofttranslator.com/translate?api-version=3.0&from={}&to={}'.format(
                      source_language, dest_language), headers=auth, json=body)
     # 200 is the code for a successful request
