@@ -19,9 +19,21 @@
         <p>{{ form.submit }}</p>
     </form> -->
     {% endif %}
-    {% for post in posts %}
+    <span align="center">{{ pagination.info }}</span>
+    <span align="center">{{ pagination.links }}</span>
+    <table>
+        <tbody>
+            {% for post in posts %}
+                {% include '_post.html' %}
+            {% endfor %}
+        </tbody>
+    </table>
+    <span align="center">{{ pagination.info }}</span>
+    <span align="center">{{ pagination.links }}</span>
+
+    <!-- {% for post in posts %}
         {% include '_post.html' %}
-    {% endfor %}
+    {% endfor %} -->
     <nav aria-label="...">
             <ul class="pager">
                 <li class="previous{% if not prev_url %} disabled{% endif %}">

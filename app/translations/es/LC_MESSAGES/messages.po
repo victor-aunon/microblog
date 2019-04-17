@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-04-15 15:48+0200\n"
+"POT-Creation-Date: 2019-04-17 13:25+0200\n"
 "PO-Revision-Date: 2019-04-08 12:37+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: es\n"
@@ -113,7 +113,7 @@ msgstr "Enviar"
 msgid "Say something"
 msgstr "Escribe algo"
 
-#: app/main/forms.py:31 app/main/routes.py:146
+#: app/main/forms.py:31 app/main/routes.py:161
 msgid "Search"
 msgstr "Buscar"
 
@@ -121,49 +121,54 @@ msgstr "Buscar"
 msgid "Message"
 msgstr "Mensaje"
 
-#: app/main/routes.py:29
+#: app/main/routes.py:30
 msgid "Your post is now live!"
 msgstr "¡Tu entrada se ha publicado!"
 
-#: app/main/routes.py:39
+#: app/main/routes.py:47
+#, python-format
+msgid "displaying %(first_this_page)d - %(last_this_page)d records of %(total)d"
+msgstr "mostrando %(first_this_page)d - %(last_this_page)d resultados de %(total)d"
+
+#: app/main/routes.py:54
 msgid "Home Page"
 msgstr "Inicio"
 
-#: app/main/routes.py:51 app/templates/base.html:88
+#: app/main/routes.py:66 app/templates/base.html:114
 msgid "Explore"
 msgstr "Explorar"
 
-#: app/main/routes.py:85
+#: app/main/routes.py:100
 msgid "Your changes have been saved."
 msgstr "Tus cambios han sido guardados."
 
-#: app/main/routes.py:90 app/templates/edit_profile.html:5
+#: app/main/routes.py:105 app/templates/edit_profile.html:5
 msgid "Edit Profile"
 msgstr "Editar perfil"
 
-#: app/main/routes.py:101
+#: app/main/routes.py:116
 msgid "You cannot follow yourself!"
 msgstr "¡No puedes seguirte a ti mismo!"
 
-#: app/main/routes.py:105
+#: app/main/routes.py:120
 #, python-format
 msgid "You are following %(username)s!"
 msgstr "¡Ahora sigues a %(username)s!"
 
-#: app/main/routes.py:117
+#: app/main/routes.py:132
 msgid "You cannot unfollow yourself!"
 msgstr "¡No puedes dejar de seguirte a ti mismo!"
 
-#: app/main/routes.py:121
+#: app/main/routes.py:136
 #, python-format
 msgid "You are not following %(username)s."
 msgstr "Ya no sigues a %(username)s."
 
-#: app/main/routes.py:166
+#: app/main/routes.py:183
 msgid "Your message has been sent."
 msgstr "Tu mensaje ha sido enviado."
 
-#: app/main/routes.py:168
+#: app/main/routes.py:185
 msgid "Send Message"
 msgstr "Enviar mensaje"
 
@@ -176,31 +181,31 @@ msgstr "%(username)s dijo %(when)s"
 msgid "Translate"
 msgstr "Traducir"
 
-#: app/templates/base.html:21
+#: app/templates/base.html:22
 msgid "Error: Could not contact server."
 msgstr "Error: No se pudo conectar con el servidor."
 
-#: app/templates/base.html:70
+#: app/templates/base.html:96
 msgid "Welcome to Microblog"
 msgstr "Bienvenid@ a Microblog"
 
-#: app/templates/base.html:87
+#: app/templates/base.html:113
 msgid "Home"
 msgstr "Inicio"
 
-#: app/templates/base.html:100
+#: app/templates/base.html:126
 msgid "Login"
 msgstr "Acceso"
 
-#: app/templates/base.html:102 app/templates/messages.html:4
+#: app/templates/base.html:130 app/templates/messages.html:4
 msgid "Messages"
 msgstr "Mensajes"
 
-#: app/templates/base.html:103
+#: app/templates/base.html:140
 msgid "Profile"
 msgstr "Perfil"
 
-#: app/templates/base.html:104
+#: app/templates/base.html:141
 msgid "Logout"
 msgstr "Salir"
 
@@ -209,11 +214,11 @@ msgstr "Salir"
 msgid "Hi, %(username)s"
 msgstr "Hola, %(username)s"
 
-#: app/templates/index.html:29 app/templates/user.html:36
+#: app/templates/index.html:41 app/templates/user.html:36
 msgid "Newer posts"
 msgstr "Mensajes nuevos"
 
-#: app/templates/index.html:34 app/templates/user.html:41
+#: app/templates/index.html:46 app/templates/user.html:41
 msgid "Older posts"
 msgstr "Mensajes antiguos"
 
@@ -236,6 +241,11 @@ msgstr "Resultados anteriores"
 #: app/templates/search.html:18
 msgid "Next results"
 msgstr "Siguientes resultados"
+
+#: app/templates/send_message.html:5
+#, python-format
+msgid "Send Message to %(recipient)s"
+msgstr "Enviar mensaje a %(recipient)s"
 
 #: app/templates/user.html:8
 #, python-format
@@ -366,4 +376,3 @@ msgstr "Ocurrió un error inesperado :S"
 #: app/templates/errors/500.html:5
 msgid "The administrator has been notified. Sorry for the inconvenience!"
 msgstr "El administrador ha sido notificado. Perdón por las molestias."
-
