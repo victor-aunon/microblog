@@ -198,10 +198,10 @@ def search():
     posts, total = Post.search(g.search_form.q.data, page, per_page)
     if page == 1:
         first_this_page = 1
-        last_this_page = len(posts)
+        last_this_page = posts.count()
     else:
         first_this_page = ((page - 1) * per_page) + 1
-        last_this_page = first_this_page + len(posts) - 1
+        last_this_page = first_this_page + posts.count() - 1
     pagination = Pagination(page=page, total=total, search=False, per_page=per_page, bs_version=4,
                     display_msg=_('displaying %(first_this_page)d - %(last_this_page)d records of %(total)d', 
                                    first_this_page=first_this_page, last_this_page=last_this_page,
