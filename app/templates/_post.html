@@ -1,32 +1,78 @@
-<table class="table table-hover">
-    <tr>
-        <td width="70px">
-            <a href="{{ url_for('main.user', username=post.author.username) }}">
-                    <img src="{{ post.author.avatar(50) }}" />
-            </a>
-        </td>
-        <td>
+{% if post.author.id == current_user.id %}
+    <div class="row" style="width: 100%;" align="right">
+        <div class="bubble-chat-me" align="left">
             {% set user_link %}
                 <span class="user_popup">
                     <a href="{{ url_for('main.user', username=post.author.username) }}">
-                        {{ post.author.username }}
+                            <strong>{{ _('You') }}</strong>
                     </a>
                 </span>
+                <span hidden>{{ post.author.username }}</span>
             {% endset %}
-            {{ _('%(username)s said %(when)s', username=user_link, when=moment(post.timestamp).fromNow()) }}:
-            <br>
-            <span id="post{{ post.id}}">{{ post.body }}</span>
+            <p align="right">
+                    {{ _('%(username)s %(when)s', username=user_link, when=moment(post.timestamp).fromNow()) }}
+            </p>
+            <p id="post{{ post.id }}" align="left" class="bubble-text">
+                {{ post.body }}
+            </p>
             {% if post.language and post.language != g.locale %}
-            {# g.locale returns a string that represents the language, eg. 'es' #}
-            <br><br>
-            <span id="translation{{ post.id }}">
-                <a href="javascript:translate(
-                            '#post{{ post.id }}',
-                            '#translation{{ post.id }}',
-                            '{{ post.language }}',
-                            '{{ g.locale }}');">{{ _('Translate') }}</a>
-            </span>
+                {# g.locale returns a string that represents the language, eg. 'es' #}
+                <br><br>
+                <span id="translation{{ post.id }}">
+                    <a href="javascript:translate(
+                                '#post{{ post.id }}',
+                                '#translation{{ post.id }}',
+                                '{{ post.language }}',
+                                '{{ g.locale }}');">{{ _('Translate') }}
+                    </a>
+                </span>
             {% endif %}
-        </td>
-    </tr>
-</table>
+        </div>
+    </div>
+{% else %}
+    <div class="row" style="width: 100%;" align="left">
+        <div class="bubble-chat-other" align="left">
+            {% set user_link %}
+                <span class="user_popup">
+                    <a href="{{ url_for('main.user', username=post.author.username) }}">
+                            <strong>{{ post.author.username }}</strong>
+                    </a>
+                </span>
+                <span hidden>{{ post.author.username }}</span>
+            {% endset %}
+            <table>
+                <tr>
+                    <td style="vertical-align: top; width: fit-content;">
+                        <img src="{{ post.author.avatar(60) }}" style="border-radius: 60px;"/>
+                    </td>
+                    <td style="padding-left: 10px;">
+                        <p align="left">
+                                {{ _('%(username)s %(when)s', username=user_link, when=moment(post.timestamp).fromNow()) }}
+                        </p>
+                        <p id="post{{ post.id}}" align="left" class="bubble-text">
+                            {{ post.body }}
+                        </p>
+                        {% if post.language and post.language != g.locale %}
+                            {# g.locale returns a string that represents the language, eg. 'es' #}
+                            <br><br>
+                            <span id="translation{{ post.id }}">
+                                <a href="javascript:translate(
+                                            '#post{{ post.id }}',
+                                            '#translation{{ post.id }}',
+                                            '{{ post.language }}',
+                                            '{{ g.locale }}');">{{ _('Translate') }}
+                                </a>
+                            </span>
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+
+           
+        </div>
+    </div>
+{% endif %}
+
+
+
+

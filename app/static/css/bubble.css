@@ -1,0 +1,43 @@
+/* Styles for bubble chats */
+
+.row {
+    margin: 0px;
+}
+
+.bubble-chat-other {
+    background-color: rgb(193, 221, 253);
+    height:fit-content;
+    float:left;
+    width:fit-content;
+    clear:none;
+    max-width: 60%;
+    padding:10px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    position:relative;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+
+.bubble-chat-me {
+    background-color:rgb(247, 223, 119);
+    height:fit-content;
+    float:right;
+    width:fit-content;
+    clear:none;
+    max-width: 60%;
+    padding:10px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    position:relative;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px;
+}
+
+.bubble-text { 
+    word-break: break-word;
+    display: inline;
+}

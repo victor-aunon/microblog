@@ -5,6 +5,7 @@
     {# Include super(), which preserves the content from the base template #}
     {{ moment.include_moment() }}
     {{ moment.lang(g.locale) }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bubble.css') }}">
 
     <script>
         // Translation function when a message's language is different from the system language
@@ -26,13 +27,14 @@
         // Function to render a popup over the author's name
         $(function() {
             var timer = null;
+            var tab_visible = true;
             $('.user_popup').hover(
                 function(event) {
                     // mouse in event handler
                     var elem = $(event.currentTarget);
-                    // timer = setTimeout(function() {
-                    //     timer = null;
-                        xhr = $.ajax('/user/' + elem.first().text().trim() + '/popup').done(
+                    timer = setTimeout(function() {
+                        timer = null;
+                        xhr = $.ajax('/user/' + elem.next().text().trim() + '/popup').done(
                             function(data) {
                                 xhr = null;
                                 elem.popover({
@@ -46,22 +48,22 @@
                                 flask_moment_render_all();
                             }
                         );
-                    // }, 1000);
+                    }, 500);
                 },
                 function(event) {
                     // mouse out event handler
                     var elem = $(event.currentTarget);
-                    // if (timer) {
-                    //     clearTimeout(timer);
-                    //     timer = null;
-                    // }
-                    // else if (xhr) {
-                    //     xhr.abort();
-                    //     xhr = null;
-                    // }
-                    // else{
+                    if (timer) {
+                        clearTimeout(timer);
+                        timer = null;
+                    }
+                    else if (xhr) {
+                        xhr.abort();
+                        xhr = null;
+                    }
+                    else{
                         elem.popover('destroy');
-                    // }
+                    }
                 }
             )
         });
@@ -72,22 +74,100 @@
             $('#message_count').css('visibility', n ? 'visible' : 'hidden');
         }
 
+        // Function to update messages div -> refresh page
+        function updateDiv() { 
+            {% if form %}
+                // window.location.href=window.location.href;
+                var arg = window.location.href.split("=")[1];
+                if (arg == undefined) {
+                    window.location.replace("{{ url_for('main.index') }}");
+                } else {
+                    window.location.replace("{{ url_for('main.index') }}" + "?page=" + window.location.href.split("=")[1]);
+                }
+            {% endif %}
+        }
+
+
+        // Tab visibility
+        // document.addEventListener('visibilitychange', handleChange);
+
+        // function handleChange() {
+        //     if(document.visibilityState == 'hidden') {
+        //         tab_visible = false;
+        //         document.title = 'You are away';
+        //     } else {
+        //         tab_visible = true;
+        //         document.title = 'Hey again';
+        //     }
+        // }
+
+        // Notifications
+        document.addEventListener('DOMContentLoaded', function () {
+        if (!Notification) {
+            alert('Desktop notifications not available in your browser. Try Chromium.'); 
+            return;
+        }
+
+        if (Notification.permission !== "granted")
+            Notification.requestPermission();
+        });
+
+        function notifyMe(title, icon, body, url) {
+            if (document.visibilityState == 'hidden') {
+                if (Notification.permission !== "granted")
+                    Notification.requestPermission();
+                else {
+                    var notification = new Notification(title, {
+                    icon: icon, body: body,
+                    });
+
+                    notification.onclick = function () {
+                    window.open(url);
+                    };
+                }
+            }
+        }
+
         // Function to call the server asking for notifications
         {% if current_user.is_authenticated %}
-        $(function() {
-            var since = 0;
-            setInterval(function() {
-                $.ajax('{{ url_for('main.notifications') }}?since=' + since).done(
-                    function(notifications) {
-                        for (var i = 0; i < notifications.length; i++) {
-                            if (notifications[i].name == 'unread_message_count')
-                                set_message_count(notifications[i].data);
-                            since = notifications[i].timestamp;
+            $(function() {
+                var since = 0;
+                setInterval(function() {
+                    $.ajax('{{ url_for('main.notifications') }}?since=' + since).done(
+                        function(notifications) {
+                            for (var i = 0; i < notifications.length; i++) {
+                                switch (notifications[i].name) {
+                                    case 'unread_message_count':
+                                        set_message_count(notifications[i].data);
+                                        break;
+                                    case 'task_progress':
+                                        set_task_progress(notifications[i].data.task_id,
+                                            notifications[i].data.progress);
+                                        break;
+                                    case 'new_post':
+                                        if (notifications[i].data.state == 1) {
+                                            updateDiv();
+                                            notifyMe(notifications[i].data.title,
+                                                     notifications[i].data.icon,
+                                                     notifications[i].data.body,
+                                                     notifications[i].data.url);
+                                        }
+                                        break;
+                                    case 'new_message':
+                                        if (notifications[i].data.state == 1) {
+                                            updateDiv();
+                                            notifyMe(notifications[i].data.title,
+                                                     notifications[i].data.icon,
+                                                     notifications[i].data.body,
+                                                     notifications[i].data.url);
+                                        }
+                                }
+                                since = notifications[i].timestamp; 
+                            }
                         }
-                    }
-                );
-            }, 10000); // 10 seconds
-        });
+                    );
+                }, 10000);
+            });
         {% endif %}
     </script>
 {% endblock %}
@@ -131,7 +211,8 @@
                             {% set new_messages = current_user.new_messages() %}
                             {% if new_messages %}
                             <span id="message_count" class="badge"
-                                  style="visibility: {% if new_messages %} visible {% else %} hidden {% endif %};">
+                                style="visibility: {% if new_messages %}visible
+                                    {% else %}hidden{% endif %};">
                                 {{ new_messages }}
                             </span>
                             {% endif %}

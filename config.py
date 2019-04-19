@@ -20,7 +20,7 @@ class Config(object):
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     ADMINS = ['ngeaugar@mot.upv.es']
 
-    POSTS_PER_PAGE = 25
+    POSTS_PER_PAGE = 20
 
     LANGUAGES = ['en', 'es']
     MS_TRANSLATOR_KEY = os.environ.get('MS_TRANSLATOR_KEY')

@@ -19,34 +19,54 @@
         <p>{{ form.submit }}</p>
     </form> -->
     {% endif %}
-    <span align="center">{{ pagination.info }}</span>
-    <span align="center">{{ pagination.links }}</span>
-    <table>
-        <tbody>
-            {% for post in posts %}
-                {% include '_post.html' %}
-            {% endfor %}
-        </tbody>
-    </table>
-    <span align="center">{{ pagination.info }}</span>
-    <span align="center">{{ pagination.links }}</span>
+    {% if form %}
+        {% if posts|length > 0 %}
+        <div align="center">{{ pagination.info }}</div>
+        <div align="center">{{ pagination.links }}</div>
+        
+            <div id="messages" class="container" style="width: 80%;">
+                {% for post in posts %}
+                    {% include '_post.html' %}
+                {% endfor %}
+            </div>
 
-    <!-- {% for post in posts %}
-        {% include '_post.html' %}
-    {% endfor %} -->
+        <div align="center">{{ pagination.info }}</div>
+        <div align="center">{{ pagination.links }}</div>
+        {% endif %}
+    {% else %}
+        {% if posts|length > 0 %}
+            <div align="center">{{ pagination.info }}</div>
+            <div align="center">{{ pagination.links }}</div>
+            
+                <div id="messages" class="container" style="width: 80%;">
+                    {% for post in posts %}
+                        {% include 'message_post.html' %}
+                    {% endfor %}
+                </div>
+
+            <div align="center">{{ pagination.info }}</div>
+            <div align="center">{{ pagination.links }}</div>
+        {% endif %}
+    {% endif %}
+
     <nav aria-label="...">
-            <ul class="pager">
-                <li class="previous{% if not prev_url %} disabled{% endif %}">
-                    <a href="{{ prev_url or '#' }}">
-                        <span aria-hidden="true">&larr;</span>{{ _('Newer posts') }}
-                    </a>
-                </li>
-                <li class="next{% if not next_url %} disabled{% endif %}">
-                    <a href="{{ next_url or '#' }}">
-                        {{ _('Older posts') }} <span aria-hidden="true">&rarr;</span>
-                    </a>
-                </li>
-            </ul>
+        <ul class="pager">
+            <li>
+                <a href="{{ '#' }}">
+                    {{ _('Go up') }}
+                </a>
+            </li>
+            <!-- <li class="previous{% if not prev_url %} disabled{% endif %}">
+                <a href="{{ prev_url or '#' }}">
+                    <span aria-hidden="true">&larr;</span>{{ _('Newer posts') }}
+                </a>
+            </li>
+            <li class="next{% if not next_url %} disabled{% endif %}">
+                <a href="{{ next_url or '#' }}">
+                    {{ _('Older posts') }} <span aria-hidden="true">&rarr;</span>
+                </a>
+            </li> -->
+        </ul>
     </nav>
     <!-- Old version: without bootstrap -->
     <!-- {% if prev_url %}
