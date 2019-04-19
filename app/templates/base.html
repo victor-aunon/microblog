@@ -6,6 +6,7 @@
     {{ moment.include_moment() }}
     {{ moment.lang(g.locale) }}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bubble.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/floating.css') }}">
 
     <script>
         // Translation function when a message's language is different from the system language
@@ -146,7 +147,7 @@
                                         break;
                                     case 'new_post':
                                         if (notifications[i].data.state == 1) {
-                                            updateDiv();
+                                            // updateDiv();
                                             notifyMe(notifications[i].data.title,
                                                      notifications[i].data.icon,
                                                      notifications[i].data.body,
@@ -155,11 +156,11 @@
                                         break;
                                     case 'new_message':
                                         if (notifications[i].data.state == 1) {
-                                            updateDiv();
                                             notifyMe(notifications[i].data.title,
                                                      notifications[i].data.icon,
                                                      notifications[i].data.body,
                                                      notifications[i].data.url);
+                                            // updateDiv();
                                         }
                                 }
                                 since = notifications[i].timestamp; 

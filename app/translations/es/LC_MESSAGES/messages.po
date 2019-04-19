@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-04-19 13:52+0200\n"
+"POT-Creation-Date: 2019-04-20 00:49+0200\n"
 "PO-Revision-Date: 2019-04-08 12:37+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: es\n"
@@ -113,7 +113,7 @@ msgstr "Enviar"
 msgid "Say something"
 msgstr "Escribe algo"
 
-#: app/main/forms.py:31 app/main/routes.py:209
+#: app/main/forms.py:31 app/main/routes.py:210
 msgid "Search"
 msgstr "Buscar"
 
@@ -121,70 +121,70 @@ msgstr "Buscar"
 msgid "Message"
 msgstr "Mensaje"
 
-#: app/main/routes.py:33
+#: app/main/routes.py:34
 #, python-format
 msgid "New post from %(username)s"
 msgstr "Nuevo post de %(username)s"
 
-#: app/main/routes.py:38
+#: app/main/routes.py:39
 msgid "Your post is now live!"
 msgstr "¡Tu entrada se ha publicado!"
 
-#: app/main/routes.py:57 app/main/routes.py:89 app/main/routes.py:112
-#: app/main/routes.py:206 app/main/routes.py:269
+#: app/main/routes.py:58 app/main/routes.py:90 app/main/routes.py:113
+#: app/main/routes.py:207
 #, python-format
 msgid "displaying %(first_this_page)d - %(last_this_page)d records of %(total)d"
 msgstr "mostrando %(first_this_page)d - %(last_this_page)d resultados de %(total)d"
 
-#: app/main/routes.py:64
+#: app/main/routes.py:65
 msgid "Home Page"
 msgstr "Inicio"
 
-#: app/main/routes.py:94 app/templates/base.html:194
+#: app/main/routes.py:95 app/templates/base.html:195
 msgid "Explore"
 msgstr "Explorar"
 
-#: app/main/routes.py:141
+#: app/main/routes.py:142
 msgid "Your changes have been saved."
 msgstr "Tus cambios han sido guardados."
 
-#: app/main/routes.py:146 app/templates/edit_profile.html:5
+#: app/main/routes.py:147 app/templates/edit_profile.html:5
 msgid "Edit Profile"
 msgstr "Editar perfil"
 
-#: app/main/routes.py:157
+#: app/main/routes.py:158
 msgid "You cannot follow yourself!"
 msgstr "¡No puedes seguirte a ti mismo!"
 
-#: app/main/routes.py:161
+#: app/main/routes.py:162
 #, python-format
 msgid "You are following %(username)s!"
 msgstr "¡Ahora sigues a %(username)s!"
 
-#: app/main/routes.py:173
+#: app/main/routes.py:174
 msgid "You cannot unfollow yourself!"
 msgstr "¡No puedes dejar de seguirte a ti mismo!"
 
-#: app/main/routes.py:177
+#: app/main/routes.py:178
 #, python-format
 msgid "You are not following %(username)s."
 msgstr "Ya no sigues a %(username)s."
 
-#: app/main/routes.py:240
+#: app/main/routes.py:242
 #, python-format
 msgid "New message from %(username)s"
 msgstr "Nuevo mensaje de %(username)s"
 
-#: app/main/routes.py:244
+#: app/main/routes.py:246
 msgid "Your message has been sent."
 msgstr "Tu mensaje ha sido enviado."
 
-#: app/main/routes.py:246
+#: app/main/routes.py:250
 msgid "Send Message"
 msgstr "Enviar mensaje"
 
-#: app/main/routes.py:272 app/templates/base.html:210
-#: app/templates/messages.html:4
+#: app/main/routes.py:296 app/templates/base.html:211
+#: app/templates/messages.html:7
 msgid "Messages"
 msgstr "Mensajes"
 
@@ -202,27 +202,27 @@ msgstr "%(username)s %(when)s"
 msgid "Translate"
 msgstr "Traducir"
 
-#: app/templates/base.html:23
+#: app/templates/base.html:24
 msgid "Error: Could not contact server."
 msgstr "Error: No se pudo conectar con el servidor."
 
-#: app/templates/base.html:176
+#: app/templates/base.html:177
 msgid "Welcome to Microblog"
 msgstr "Bienvenid@ a Microblog"
 
-#: app/templates/base.html:193
+#: app/templates/base.html:194
 msgid "Home"
 msgstr "Inicio"
 
-#: app/templates/base.html:206
+#: app/templates/base.html:207
 msgid "Login"
 msgstr "Acceso"
 
-#: app/templates/base.html:221
+#: app/templates/base.html:222
 msgid "Profile"
 msgstr "Perfil"
 
-#: app/templates/base.html:222
+#: app/templates/base.html:223
 msgid "Logout"
 msgstr "Salir"
 
@@ -231,7 +231,7 @@ msgstr "Salir"
 msgid "Hi, %(username)s"
 msgstr "Hola, %(username)s"
 
-#: app/templates/index.html:56 app/templates/messages.html:21
+#: app/templates/index.html:56 app/templates/messages.html:80
 #: app/templates/user.html:44
 msgid "Go up"
 msgstr "Ir arriba"
@@ -249,7 +249,12 @@ msgstr "Mensajes antiguos"
 msgid "%(username)s said %(when)s"
 msgstr "%(username)s dijo %(when)s"
 
-#: app/templates/messages.html:28
+#: app/templates/messages.html:26 app/templates/messages.html:45
+#, python-format
+msgid "Reply to %(recipient)s"
+msgstr "Responder a %(recipient)s"
+
+#: app/templates/messages.html:87
 msgid "You do not have messages yet."
 msgstr "No tienes mensajes todavía."
 

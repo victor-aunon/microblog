@@ -1,28 +1,78 @@
 {% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+
 
 {% block app_content %}
     <h1>{{_('Messages') }}</h1>
     {% if messages|length > 0 %}
-        <div align="center">{{ pagination.info }}</div>
-        <div align="center">{{ pagination.links }}</div>
-        
-            <div id="messages" class="container" style="width: 80%;">
-                {% for post in messages %}
-                    {% include 'message_post.html' %}
-                {% endfor %}
-            </div>
+    <div class="container">
+        <ul class="nav nav-tabs">
+            {% for user_id, values in messages %}
+                {% if loop.index0 == 0 %}
+                    <li class="active"><a data-toggle="tab" id="li-{{ user_id }}" 
+                        href="#{{ user_id }}">{{ values['username'] }}</a></li>
+                {% else %}
+                    <li><a data-toggle="tab" id="li-{{ user_id }}" 
+                        href="#{{ user_id }}">{{ values['username'] }}</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
 
-        <div align="center">{{ pagination.info }}</div>
-        <div align="center">{{ pagination.links }}</div>
-        <nav aria-label="...">
-            <ul class="pager">
-                <li>
-                    <a href="{{ '#' }}">
-                        {{ _('Go up') }}
-                    </a>
-                </li>
-            </ul>
-        </nav>
+        <div class="tab-content" style="width: 80%; margin-left: 10%;">
+            {% for user_id, values in messages %}
+                {% if loop.index0 == 0 %}
+                    <div id="{{ user_id }}" class="tab-pane fade in active">
+                        <h4>{{ _('Reply to %(recipient)s', recipient=values['username']) }}</h4>
+                        <div class="row">
+                            <form action="{{ url_for('main.send_message', recipient=values['username'],
+                                         from_messages=True) }}" 
+                                method="post" novalidate>
+                                {{ form.hidden_tag() }}
+                                <p>
+                                    {{ wtf.form_field(form.message) }}
+                                </p>
+                                <p>{{ wtf.form_field(form.submit, button_map={'submit':'primary'}) }}</p>
+                            </form>
+                        </div>
+                        <br>
+                        {% for post in values['messages'] %}
+                            {% include '_post.html' %}
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div id="{{ user_id }}" class="tab-pane fade">
+                        <h4>{{ _('Reply to %(recipient)s', recipient=values['username']) }}</h4>
+                        <div class="row">
+                            <form action="{{ url_for('main.send_message', recipient=values['username'],
+                                            from_messages=True) }}" 
+                                method="post" novalidate>
+                                {{ form.hidden_tag() }}
+                                <p>
+                                    {{ wtf.form_field(form.message) }}
+                                </p>
+                                <p>{{ wtf.form_field(form.submit, button_map={'submit':'primary'}) }}</p>
+                            </form>
+                        </div>
+                        <br>
+                        {% for post in values['messages'] %}
+                            {% include '_post.html' %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <nav class="float-button" aria-label="...">
+        <ul class="pager">
+            <li>
+                <a href="{{ '#' }}">
+                    {{ _('Go up') }}
+                </a>
+            </li>
+        </ul>
+    </nav>
     {% else %}
     <br>
     <h4>{{ _('You do not have messages yet.') }}</h4>

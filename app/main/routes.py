@@ -1,4 +1,5 @@
 from datetime import datetime
+from collections import OrderedDict
 from flask import render_template, flash, redirect, url_for, request, g, jsonify, current_app
 from flask_login import current_user, login_required
 from flask_babel import _, lazy_gettext as _l, get_locale
@@ -226,6 +227,7 @@ def user_popup(username):
 @login_required
 def send_message(recipient):
     user = User.query.filter_by(username=recipient).first_or_404()
+    from_messages = request.args.get('from_messages', False, type=bool)
     form = MessageForm()
     if form.validate_on_submit():
         try:
@@ -242,6 +244,8 @@ def send_message(recipient):
                  'url': url_for('main.messages')})
         db.session.commit()
         flash(_('Your message has been sent.'), category='success')
+        if from_messages:
+            return redirect(url_for('main.messages'))
         return redirect(url_for('main.user', username=recipient))
     return render_template('send_message.html', title=_('Send Message'),
                            form=form, recipient=recipient)
@@ -254,23 +258,44 @@ def messages():
     current_user.add_notification('unread_message_count', 0)
     current_user.add_notification('new_message', {'state': 0})
     db.session.commit()
+    form = MessageForm()
     page = request.args.get('page', 1, type=int)
     per_page = current_app.config['POSTS_PER_PAGE']
-    messages = current_user.messages_received.order_by(
-        Message.timestamp.desc()).paginate(
-            page, per_page, False)
-    if page == 1:
-        first_this_page = 1
-        last_this_page = len(messages.items)
-    else:
-        first_this_page = ((page - 1) * per_page) + 1
-        last_this_page = first_this_page + len(messages.items) - 1
-    pagination = Pagination(page=page, total=messages.total, search=False, per_page=per_page, bs_version=4,
-                    display_msg=_('displaying %(first_this_page)d - %(last_this_page)d records of %(total)d', 
-                                   first_this_page=first_this_page, last_this_page=last_this_page,
-                                   total=messages.total))
-    return render_template('messages.html', title=_('Messages'),
-                             messages=messages.items, pagination=pagination)
+    messages = current_user.messages_received.union(current_user.messages_sent).order_by(
+        Message.timestamp.desc())
+    # messages = current_user.messages_received.order_by(
+    #     Message.timestamp.desc()).paginate(
+    #         page, per_page, False)
+    messages_dict = OrderedDict()
+    for message in messages:
+        if message.author.id == current_user.id:
+            if message.recipient.id not in messages_dict.keys():
+                messages_dict[message.recipient.id] = {'username': message.recipient.username,
+                                                       'messages': [message], 'pagination': 0}
+            else:
+                messages_dict[message.recipient.id]['messages'].append(message)
+        else:
+            if message.author.id not in messages_dict.keys():
+                messages_dict[message.author.id] = {'username': message.author.username,
+                                                    'messages': [message], 'pagination': 0}
+            else:
+                messages_dict[message.author.id]['messages'].append(message)
+    ## No pagination for this new version of messages page
+    # if page == 1:
+    #     first_this_page = 1
+    #     last_this_page = len(messages.items)
+    # else:
+    #     first_this_page = ((page - 1) * per_page) + 1
+    #     last_this_page = first_this_page + len(messages.items) - 1
+    # pagination = Pagination(page=page, total=messages.total, search=False, per_page=per_page, bs_version=4,
+    #                 display_msg=_('displaying %(first_this_page)d - %(last_this_page)d records of %(total)d', 
+    #                                first_this_page=first_this_page, last_this_page=last_this_page,
+    #                                total=messages.total))
+    # return render_template('messages.html', title=_('Messages'),
+    #                          messages=messages.items, pagination=pagination)
+    return render_template('messages.html', title=_('Messages'), form=form,
+                             messages=messages_dict.items())
+
     # next_url = url_for('main.messages', page=messages.next_num) \
     #     if messages.has_next else None
     # prev_url = url_for('main.messages', page=messages.prev_num) \
