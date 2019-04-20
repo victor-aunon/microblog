@@ -76,14 +76,14 @@
         }
 
         // Function to update messages div -> refresh page
-        function updateDiv() { 
+        function refresh() { 
             {% if form %}
                 // window.location.href=window.location.href;
                 var arg = window.location.href.split("=")[1];
                 if (arg == undefined) {
-                    window.location.replace("{{ url_for('main.index') }}");
+                    setTimeout(function(){ window.location.replace("{{ url_for('main.index') }}");}, 5000);
                 } else {
-                    window.location.replace("{{ url_for('main.index') }}" + "?page=" + window.location.href.split("=")[1]);
+                    setTimeout(function(){ window.location.replace("{{ url_for('main.index') }}" + "?page=" + window.location.href.split("=")[1]);}, 5000);
                 }
             {% endif %}
         }
@@ -147,11 +147,11 @@
                                         break;
                                     case 'new_post':
                                         if (notifications[i].data.state == 1) {
-                                            // updateDiv();
                                             notifyMe(notifications[i].data.title,
                                                      notifications[i].data.icon,
                                                      notifications[i].data.body,
                                                      notifications[i].data.url);
+                                            refresh();
                                         }
                                         break;
                                     case 'new_message':
@@ -160,7 +160,6 @@
                                                      notifications[i].data.icon,
                                                      notifications[i].data.body,
                                                      notifications[i].data.url);
-                                            // updateDiv();
                                         }
                                 }
                                 since = notifications[i].timestamp; 
