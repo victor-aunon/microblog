@@ -6,22 +6,22 @@
 
 /* Some divs width */
 .tab-content {
-    width: 80%;
-    margin-left: 10%;
+    width: 100%;
+    margin-left: 0%;
 }
 
 #messages {
-    width: 80%;
+    width: 100%;
 }
 
-@media only screen and (max-device-width: 800px) {
+@media (min-width: 992px) {
     .tab-content {
-        width: 90%;
-        margin-left: 5%;
+        width: 80%;
+        margin-left: 10%;
     };
 
     #messages{
-        width: 90%;
+        width: 80%;
     }
 }
 
@@ -42,7 +42,7 @@
     float:left;
     width:fit-content;
     clear:none;
-    max-width: 60%;
+    max-width: 75%;
     padding:10px;
     margin-top: 8px;
     margin-bottom: 8px;
@@ -60,7 +60,7 @@
     float:right;
     width:fit-content;
     clear:none;
-    max-width: 60%;
+    max-width: 75%;
     padding:10px;
     margin-top: 8px;
     margin-bottom: 8px;
