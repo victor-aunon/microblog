@@ -5,8 +5,7 @@
     {# Include super(), which preserves the content from the base template #}
     {{ moment.include_moment() }}
     {{ moment.lang(g.locale) }}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bubble.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/floating.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 
     <script>
         // Translation function when a message's language is different from the system language

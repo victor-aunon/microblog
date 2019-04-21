@@ -1,9 +1,41 @@
-/* Styles for bubble chats */
+
 
 .row {
     margin: 0px;
 }
 
+/* Some divs width */
+.tab-content {
+    width: 80%;
+    margin-left: 10%;
+}
+
+#messages {
+    width: 80%;
+}
+
+@media only screen and (max-device-width: 800px) {
+    .tab-content {
+        width: 90%;
+        margin-left: 5%;
+    };
+
+    #messages{
+        width: 90%;
+    }
+}
+
+/* Floating "go up" button */
+.float-button {
+    position: fixed;
+    right: 5%;
+    top: 90%;
+    transition: all 0.2s ease-in 0s;
+    z-index: 9999;
+    cursor: pointer;
+}
+
+/* Styles for bubble chats */
 .bubble-chat-other {
     background-color: rgb(193, 221, 253);
     height:fit-content;
@@ -14,6 +46,7 @@
     padding:10px;
     margin-top: 8px;
     margin-bottom: 8px;
+    padding-right: 15px;
     position:relative;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
@@ -31,6 +64,7 @@
     padding:10px;
     margin-top: 8px;
     margin-bottom: 8px;
+    padding-right: 15px;
     position:relative;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
