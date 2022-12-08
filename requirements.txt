@@ -1,7 +1,7 @@
 alembic==1.0.8
 Babel==2.6.0
 blinker==1.4
-certifi==2019.3.9
+certifi==2022.12.7
 chardet==3.0.4
 Click==7.0
 colorama==0.4.1
